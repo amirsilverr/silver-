@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SILVER TV | Series Manager</title>
+<meta name="description" content="SILVER TV — a personal movie and series manager. Organize your movies, shows, watchlist and favorites in one modern dashboard.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SILVER TV | Series Manager">
+<meta property="og:description" content="Explore the SILVER TV series collection: track movies and shows, manage your watchlist and keep your favorites together.">
+<meta property="og:image" content="https://user55191.na.imgto.link/public/20261112/af46ebb8909a3ce346703d9f-1000013733.avif">
+<meta property="og:image:alt" content="SILVER TV logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SILVER TV | Series Manager">
+<meta name="twitter:description" content="A modern home for your series collection, watchlist and favorite shows.">
+<meta name="twitter:image" content="https://user55191.na.imgto.link/public/20261112/af46ebb8909a3ce346703d9f-1000013733.avif">
+<link rel="icon" type="image/avif" href="https://user55191.na.imgto.link/public/20261112/af46ebb8909a3ce346703d9f-1000013733.avif">
+<link rel="stylesheet" href="/style.css">
+
+
+</head>
+<body>
+<!-- Prevent browsers from mistaking list-entry fields for login credentials. -->
+<div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"><input type="text" name="username" autocomplete="username" tabindex="-1"><input type="password" name="password" autocomplete="new-password" tabindex="-1"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">SILVER<span>TV24</span></div>
+  <div class="version">SERIES MANAGER · VERSION 5.9</div>
+  <div class="nav-label">MAIN MENU</div>
+  <nav class="nav">
+    <button class="active" data-page="home">⌂ Home</button>
+    <button data-page="dashboard">◫ Dashboard</button>
+    <button data-page="overview">▦ OVERVIEW</button>
+    <button data-page="series">▤ My List</button>
+    <button data-page="watchlist">◷ Watchlist</button>
+    <button data-page="top">★ Favorites</button>
+    <div class="nav-label">AMIR'S SERIES</div>
+    <button data-page="amirWatched">✓ Series I've Watched</button>
+    <button data-page="amirWant">＋ Watchlist</button>
+    <button data-page="telegram">➤ Telegram Channel</button>
+    <button data-page="omdbSettings">▣ OMDb API Settings</button>
+    <button data-page="deleteData">⌫ Delete Data</button>
+  </nav>
+  <div class="sidebar-footer">CREATED BY AMIR SILVER</div>
+</aside>
+<div class="overlay" id="overlay"></div>
+
+<main class="main">
+<header class="topbar">
+  <div style="display:flex;align-items:center;gap:13px">
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <div><h1 id="pageTitle">Home</h1><p>Discover movies, series and cinematic universes</p></div>
+  </div>
+  <button class="theme-toggle" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark mode is on" title="Switch to light mode">
+    <span class="theme-switch-thumb" id="themeSwitchThumb">🌙</span>
+  </button>
+</header>
+
+<section class="page active" id="home">
+  <div class="dashboard-brand" id="homeTop">
+    <img class="dashboard-brand-logo" src="https://user55191.na.imgto.link/public/20261112/af46ebb8909a3ce346703d9f-1000013733.avif" alt="SILVER TV logo" loading="eager" referrerpolicy="no-referrer">
+    <div class="dashboard-brand-copy"><h2>SILVER TV</h2><p>YOUR SERIES COLLECTION</p></div>
+  </div>
+  <nav class="home-nav" aria-label="Home sections">
+    <a href="#homeTop" data-home-anchor="homeTop">Home</a>
+    <a href="#homeSeries" data-home-anchor="homeSeries">Series</a>
+    <a href="#homeMovies" data-home-anchor="homeMovies">Movies</a>
+    <a href="#homeFranchise" data-home-anchor="homeFranchise">Franchise</a>
+  </nav>
+  <div class="home-feature" id="homeFeatured"><div class="home-feature-copy"><span class="home-eyebrow">EDITOR'S PICK</span><h2>Breaking Bad</h2><p>Loading series details…</p></div></div>
+  <section class="home-section" id="homeSeries"><div class="panel-head"><div><h2>Top Series</h2><p class="muted">Six highly rated series</p></div></div><div class="home-title-grid" id="homeTopSeries"><div class="empty">Loading series…</div></div></section>
+  <section class="home-section" id="homeMovies"><div class="panel-head"><div><h2>Top Movies</h2><p class="muted">Six must-watch movies</p></div></div><div class="home-title-grid" id="homeTopMovies"><div class="empty">Loading movies…</div></div></section>
+  <section class="home-section" id="homeFranchise">
+    <div class="panel-head"><div><h2>Franchise</h2><p class="muted">Explore iconic cinematic universes</p></div></div>
+    <div class="franchise-grid">
+      <button type="button" class="franchise-card marvel-card" data-franchise="marvel" aria-label="Show Marvel movies"><span class="franchise-kicker">THE UNIVERSE</span><strong>MARVEL</strong><small>STUDIOS</small></button>
+      <button type="button" class="franchise-card dc-card" data-franchise="dc" aria-label="Show DC movies"><span class="franchise-kicker">HEROES & LEGENDS</span><strong>DC</strong><small>UNIVERSE</small></button>
+      <button type="button" class="franchise-card starwars-card" data-franchise="starwars" aria-label="Show Star Wars movies"><span class="franchise-kicker">A GALAXY FAR, FAR AWAY</span><strong>STAR WARS</strong><small>EXPLORE THE SAGA</small></button>
+    </div>
+  </section>
+</section>
+
+<div class="franchise-modal" id="franchiseModal" role="dialog" aria-modal="true" aria-labelledby="franchiseModalTitle">
+  <div class="franchise-modal-box">
+    <div class="franchise-modal-head">
+      <div><h2 id="franchiseModalTitle">Franchise</h2><p class="muted" id="franchiseModalSubtitle" style="margin:5px 0 0;font-size:12px">Popular movies</p></div>
+      <button type="button" class="franchise-close" id="franchiseModalClose" aria-label="Close">×</button>
+    </div>
+    <div class="franchise-movie-grid" id="franchiseMovieGrid"><div class="franchise-loading">Loading movies…</div></div>
+  </div>
+</div>
+
+<section class="page" id="dashboard">
+  <div class="dashboard-brand">
+    <img class="dashboard-brand-logo" src="https://user55191.na.imgto.link/public/20261112/af46ebb8909a3ce346703d9f-1000013733.avif" alt="SILVER TV logo" loading="eager" referrerpolicy="no-referrer">
+    <div class="dashboard-brand-copy">
+      <h2>SILVER TV</h2>
+      <p>YOUR SERIES COLLECTION</p>
+    </div>
+  </div>
+  <div class="grid" id="stats"></div>
+  <div class="two-col">
+    <div class="panel"><div class="panel-head"><h2>Recently Added</h2></div><div id="recent"></div></div>
+    <div class="panel"><div class="panel-head"><h2>Top Rated</h2></div><div id="topRated"></div></div>
+  </div>
+
+  <div class="panel"><div class="panel-head"><h2>Favorites</h2><span class="muted">Top 3</span></div><div class="dashboard-favorites" id="dashboardFavorites"></div></div>
+</section>
+
+<section class="page" id="series">
+  <div class="panel mylist-hub">
+    <div class="panel-head"><div><h2>My List</h2><p class="muted" style="font-size:12px;margin:7px 0 0">Create separate collections for your movies and series.</p></div><span class="badge" id="customListCount">0 Lists</span></div>
+    <div class="create-list-box">
+      <h3>＋ Create a New List</h3>
+      <div class="toolbar">
+        <input id="newCustomListName" autocomplete="off" class="search" placeholder="Enter list name..." maxlength="50">
+        <select id="newCustomListType"><option value="series">Series</option><option value="movie">Movies</option></select>
+        <button class="btn primary" id="createCustomListBtn">Create List</button>
+      </div>
+    </div>
+    <div class="panel-head" style="margin-top:25px"><h2>Your Lists</h2></div>
+    <div class="toolbar"><input id="customListSearch" class="search" placeholder="Search list names..."></div>
+    <div id="customListsGrid" class="custom-lists-grid"></div>
+  </div>
+  <div hidden aria-hidden="true">
+    <span id="seriesCount"></span><button id="seriesEditToggle"></button><p id="seriesEditHint"></p>
+    <input id="seriesSearch"><select id="statusFilter"><option value="all">All Status</option><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select>
+    <button id="sortReset"></button><button id="addOne"></button><button id="bulkOpen"></button>
+    <select id="sortSelect"><option value="manual">Manual</option></select><div id="seriesList"></div>
+    <div class="selection-tools" data-selection-tools="series"></div>
+  </div>
+</section>
+
+<section class="page" id="customListDetail">
+  <div class="panel">
+    <div class="panel-head"><div><button class="btn small" id="backToCustomLists">← My Lists</button><h2 id="customDetailTitle" style="margin-top:12px;overflow-wrap:anywhere">My List</h2><p class="muted" id="customDetailSubtitle" style="font-size:12px;margin:6px 0 0"></p></div><div class="custom-detail-head-actions"><span class="badge" id="customDetailCount">0 items</span><button class="btn small" id="customEditToggle">Edit</button></div></div>
+    <p class="edit-hint" id="customEditHint" hidden>Edit mode: select, rename, move or remove items.</p>
+    <div class="toolbar"><input id="customItemSearch" class="search" placeholder="Search titles..."><select id="customItemSort"><option value="manual">Manual Order</option><option value="az">Name (A–Z)</option><option value="za">Name (Z–A)</option><option value="oldest">Release Year (Oldest First)</option><option value="newest">Release Year (Newest First)</option><option value="rating">Rating (Highest First)</option><option value="status">Watch Status</option></select><button class="btn primary" id="customAddOne">＋ Add One</button><button class="btn" id="customBulkOpen">＋ Add Multiple</button></div>
+    <div class="list-tools"><button class="btn small" id="customBackupBtn" data-backup="custom:">Backup List</button><button class="btn small" id="customCopyBtn" data-copy="custom:">Copy List</button><button class="btn small" id="customShareBtn" data-share="custom:">Share List</button></div>
+    <div class="selection-tools" id="customSelectionTools"><label><input class="select-box" type="checkbox" id="customSelectAll"> Select all</label><span class="muted" id="customSelectedCount">0 selected</span><button class="btn small danger" id="customBulkDelete">Delete selected</button><input type="number" min="1900" max="2100" placeholder="Year" id="customBulkYear"><button class="btn small" id="customApplyYear">Set year</button><input type="number" min="0" max="10" step="0.01" placeholder="Rating" id="customBulkRating"><button class="btn small" id="customApplyRating">Set rating</button><select id="customBulkStatus"><option value="">Set status…</option><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select><button class="btn small" id="customApplyStatus">Apply</button></div>
+    <div class="series-list" id="customItemsList"></div>
+  </div>
+</section>
+<section class="page" id="watchlist">
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Watchlist</h2>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="muted" id="watchCount">0 items</span>
+        <button class="btn small" id="watchEditToggle">Edit</button>
+      </div>
+    </div>
+    <p class="muted" style="font-size:12px">Your independent watchlist. Items here do not need to exist in Series List.</p>
+    <p class="edit-hint" id="watchEditHint" hidden>Edit mode: rename, delete or move watchlist items.</p>
+    <div class="toolbar">
+      <button class="btn primary" id="watchAdd">＋ Add Manually</button>
+      <button class="btn" id="watchBulkOpen">＋ Bulk Add</button>
+    </div>
+    <div class="favorite-browse-box watch-browse-box">
+      <h3>Search &amp; Sort</h3>
+      <div class="toolbar">
+        <input class="search" id="watchSearch" placeholder="Search watchlist...">
+        <select id="watchStatusFilter" aria-label="Filter by watch status">
+          <option value="all">All Status</option>
+          <option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option>
+        </select>
+        <select id="watchSortSelect" class="search" aria-label="Sort watchlist">
+          <option value="manual">Manual Order</option>
+          <option value="az">Name (A–Z)</option>
+          <option value="za">Name (Z–A)</option>
+          <option value="oldest">Release Year (Oldest First)</option>
+          <option value="newest">Release Year (Newest First)</option>
+          <option value="rating">Rating (Highest First)</option>
+          <option value="status">Watch Status</option>
+        </select>
+      </div>
+    </div>
+    <div class="list-tools"><button class="btn small" data-backup="watchlist">Backup List</button><button class="btn small" data-copy="watchlist">Copy List</button><button class="btn small" data-share="watchlist">Share List</button></div>
+    <div class="selection-tools" data-selection-tools="watchlist" hidden><label><input class="select-box" type="checkbox" data-select-all="watchlist"> Select all</label><span class="muted" data-selected-count="watchlist">0 selected</span><button class="btn small danger" data-bulk-delete="watchlist">Delete</button><input type="number" min="1900" max="2100" placeholder="Year" data-bulk-year="watchlist"><button class="btn small" data-apply-year="watchlist">Set year</button><input type="number" min="0" max="10" step="0.01" placeholder="Rating" data-bulk-rating="watchlist"><button class="btn small" data-apply-rating="watchlist">Set rating</button></div>
+    <div class="series-list" id="watchList"></div>
+  </div>
+</section>
+
+<section class="page" id="top">
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Favorites</h2>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="muted" id="topCount">0 items</span>
+        <button class="btn small" id="topEditToggle">Edit</button>
+      </div>
+    </div>
+    <p class="muted" style="font-size:12px">Favorites can only include titles that are already available in Overview.</p>
+    <p class="edit-hint" id="topEditHint" hidden>Edit mode: edit details, remove or move favorites.</p>
+    <div class="favorite-add-box" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div><h3>＋ Add a Favorite</h3><p>The title must already exist in Overview. Choose it there, then set its position in Favorites.</p></div>
+      <button class="btn primary" id="topAddOpen">＋ Add Favorite</button>
+    </div>
+    <div class="favorite-browse-box">
+      <h3>⌕ Search inside your Favorites</h3>
+      <div class="toolbar">
+        <input class="search" id="topSearch" placeholder="Filter titles already in Favorites...">
+        <select id="topSortSelect" aria-label="Sort favorites">
+          <option value="manual">Manual Order</option><option value="az">Name (A–Z)</option><option value="za">Name (Z–A)</option>
+          <option value="oldest">Release Year (Oldest First)</option><option value="newest">Release Year (Newest First)</option>
+          <option value="rating">Rating (Highest First)</option><option value="status">Watch Status</option>
+        </select>
+      </div>
+    </div>
+    <div class="list-tools"><button class="btn small" data-backup="topList">Backup List</button><button class="btn small" data-copy="topList">Copy List</button><button class="btn small" data-share="topList">Share List</button></div>
+    <div class="selection-tools" data-selection-tools="topList" hidden><label><input class="select-box" type="checkbox" data-select-all="topList"> Select all</label><span class="muted" data-selected-count="topList">0 selected</span><button class="btn small danger" data-bulk-delete="topList">Remove</button></div>
+    <div class="series-list" id="topList"></div>
+  </div>
+</section>
+
+
+<section class="page" id="overview">
+  <div class="panel">
+    <div class="panel-head"><div><h2>OVERVIEW</h2><p class="muted" style="font-size:12px;margin:6px 0 0">A separate collection for movies and series with watch-status filters.</p></div><span class="badge" id="overviewCount">0 items</span></div>
+    <div class="overview-tabs" id="overviewTypeTabs">
+      <button class="btn active" data-overview-type="all">All</button>
+      <button class="btn" data-overview-type="series">Series</button>
+      <button class="btn" data-overview-type="movie">Movies</button>
+    </div>
+    <div class="overview-status-tabs" id="overviewStatusTabs">
+      <button class="btn active" data-overview-status="all">All Status</button>
+      <button class="btn" data-overview-status="Planned">Planned</button>
+      <button class="btn" data-overview-status="Watching">Watching</button>
+      <button class="btn" data-overview-status="Watched">Watched</button>
+      <button class="btn" data-overview-status="Stop Watching">Stop Watching</button>
+    </div>
+    <div class="toolbar"><input id="overviewSearch" class="search" placeholder="Search Overview..."><button class="btn primary" id="overviewAddBtn">＋ Add</button><button class="btn" id="overviewEditToggle">Edit</button></div>
+    <p class="edit-hint" id="overviewEditHint" hidden>Edit mode: select multiple items to delete or change their watch status.</p>
+    <div id="overviewSelectionTools"><label><input class="select-box" type="checkbox" id="overviewSelectAll"> Select all</label><span class="muted" id="overviewSelectedCount">0 selected</span><button class="btn small danger" id="overviewBulkDelete">Delete selected</button><select id="overviewBulkStatus"><option value="">Change status…</option><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select><button class="btn small" id="overviewApplyStatus">Apply status</button></div>
+    <div class="series-list" id="overviewItemsList"></div>
+  </div>
+</section>
+
+<section class="page" id="amirWatched">
+  <div class="panel">
+    <div class="panel-head"><h2>Series I've Watched</h2><span class="muted" id="amirWatchedCount">0 items</span></div>
+    <div class="stats-group amir-watch-stats">
+      <div class="status-stats">
+        <div class="stat"><small>Total Series</small><strong>88</strong></div>
+        <div class="stat"><small>Episodes Watched</small><strong>3,225</strong></div>
+        <div class="stat"><small>Time Spent</small><strong>2,196 <span class="amir-hours-unit">Hours</span></strong></div>
+      </div>
+    </div>
+    <div class="toolbar">
+      <input class="search" id="amirWatchedSearch" placeholder="Search watched series...">
+      <select id="amirWatchedSortSelect" class="search"><option value="manual">Manual Order</option><option value="az">Name (A–Z)</option><option value="za">Name (Z–A)</option><option value="oldest">Release Year (Oldest First)</option><option value="newest">Release Year (Newest First)</option><option value="rating">Rating (Highest First)</option><option value="status">Watch Status</option></select>
+    </div>
+    <div class="series-list" id="amirWatchedList"></div>
+    <div hidden><select id="amirWatchedStatusFilter"><option value="all">All Status</option></select><button id="amirWatchedSortReset"></button><button id="amirWatchedAdd"></button><button id="amirWatchedBulkOpen"></button><button id="amirWatchedEditToggle"></button><p id="amirWatchedEditHint"></p><div id="amirWatchedHours"></div><div id="amirWatchedEpisodes"></div><div data-selection-tools="amirWatched"></div></div>
+  </div>
+</section>
+
+<section class="page" id="amirWant">
+  <div class="panel">
+    <div class="panel-head"><h2>Amir's Watchlist</h2><span class="muted" id="amirWantCount">0 items</span></div>
+    <div class="toolbar">
+      <input class="search" id="amirWantSearch" placeholder="Search series...">
+      <select id="amirWantSortSelect" class="search"><option value="manual">Manual Order</option><option value="az">Name (A–Z)</option><option value="za">Name (Z–A)</option><option value="oldest">Release Year (Oldest First)</option><option value="newest">Release Year (Newest First)</option><option value="rating">Rating (Highest First)</option><option value="status">Watch Status</option></select>
+    </div>
+    <div class="series-list" id="amirWantList"></div>
+    <div hidden><select id="amirWantStatusFilter"><option value="all">All Status</option></select><button id="amirWantSortReset"></button><button id="amirWantAdd"></button><button id="amirWantBulkOpen"></button><button id="amirWantEditToggle"></button><p id="amirWantEditHint"></p><div data-selection-tools="amirWant"></div></div>
+  </div>
+</section>
+
+<section class="page" id="telegram">
+  <div class="panel telegram-card">
+    <div class="telegram-icon">➤</div>
+    <h2>Telegram Channel</h2>
+    <p>Follow SILVERTV24 on Telegram for updates and more.</p>
+    <div style="font-size:17px;font-weight:700;margin-top:18px">@silvertv24</div>
+    <a class="telegram-link" href="https://t.me/silvertv24" target="_blank" rel="noopener noreferrer">Open Telegram Channel ↗</a>
+  </div>
+</section>
+
+<section class="page" id="omdbSettings">
+  <div class="panel delete-card">
+    <div class="panel-head"><h2>OMDb API Settings</h2><span class="badge">Poster Database</span></div>
+    <p class="muted" style="font-size:13px;line-height:1.7">A default OMDb API key is already configured for everyone. You can optionally replace it with your own key below.</p>
+    <div class="field">
+      <label for="omdbApiKey">API Key</label>
+      <div class="api-key-row">
+        <input id="omdbApiKey" type="password" placeholder="Enter your own API key (optional)" autocomplete="off" disabled>
+        <button class="btn" id="omdbRevealBtn" type="button">Show</button>
+        <button class="btn" id="omdbEditBtn" type="button">Edit</button>
+        <button class="btn primary" id="omdbSaveBtn" type="button">Save</button>
+      </div>
+      <div class="api-status" id="omdbStatus" aria-live="polite"></div>
+      <div class="api-status" id="omdbActiveStatus" aria-live="polite">Active default API: #1</div>
+    </div>
+    <div class="backup-panel">
+      <h3>How to get your free API key</h3>
+      <ol class="api-help">
+        <li>Open the <a href="https://www.omdbapi.com/apikey.aspx" target="_blank" rel="noopener noreferrer">OMDb API Key page</a>.</li>
+        <li>Select <strong>FREE! (1,000 daily limit)</strong>.</li>
+        <li>Enter your email, name and a short description of your project, then submit.</li>
+        <li>Open the email from OMDb and follow its activation link. Copy the API key from that email.</li>
+        <li>Return here, press <strong>Edit</strong>, paste the key and press <strong>Save</strong>.</li>
+      </ol>
+      <p class="api-help"><strong>Free plan limit:</strong> 1,000 requests per day. Poster lookup is cached in this browser to reduce repeat requests.</p>
+    </div>
+    <div class="delete-warning" style="margin-top:16px"><strong>Privacy note:</strong> This is a front-end HTML app. The key is stored in this browser and can be seen by anyone who can inspect the page or browser requests. Do not use a private production key here if the website is public; a server-side API route is safer.</div>
+  </div>
+</section>
+
+<section class="page" id="deleteData">
+  <div class="panel delete-card">
+    <div class="panel-head"><h2>Delete Data</h2></div>
+    <p class="muted" style="font-size:13px;line-height:1.7">Use this section to permanently delete the data saved by Series Manager in this browser.</p>
+    <div class="backup-panel"><h3>Complete Backup · All Lists</h3><p class="backup-note">Create or restore one backup containing your existing lists, custom movie and series collections, and their metadata.</p><div class="toolbar"><button class="btn primary" id="fullBackupBtn">Download Full Backup</button><button class="btn" id="fullImportBtn">Restore Full Backup</button><input type="file" id="fullBackupFile" accept=".json,.txt" hidden></div></div>
+    <div class="delete-warning"><strong>Warning:</strong> This action deletes your regular lists, favorites, custom lists and OVERVIEW data. Amir's watched series and Amir's watchlist are protected and will remain untouched. Create a complete backup first.</div>
+    <button class="btn danger" id="resetBtn">Delete All Data</button>
+  </div>
+</section>
+<footer class="app-credit">CREATED BY <span>AMIR SILVER</span></footer>
+</main>
+
+<!-- Add/Edit Modal -->
+<div class="modal-wrap" id="modalWrap">
+ <div class="modal">
+  <h2 id="modalTitle">Add Series</h2>
+  <div class="field"><label>Series Name</label><input id="formName" type="text" name="silver-title-entry" autocomplete="off" autocapitalize="words" placeholder="Enter series or movie name"></div>
+  <div class="field"><label>Release Year</label><input id="formYear" autocomplete="off" type="text" inputmode="text" placeholder="e.g. 2019 or 2019–2023"></div>
+  <div class="field" id="formStatusField"><label>Watch Status</label><select id="formStatus"><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select></div>
+  <div class="field"><label>Rating (0–10)</label><input id="formRating" autocomplete="off" type="number" min="0" max="10" step="0.01" placeholder="Optional"></div>
+  <div class="field" id="watchedEpisodesField" hidden><label>Episodes Watched</label><input id="formEpisodesWatched" type="number" min="0" step="1" placeholder="e.g. 62"><small>Enter the number of episodes you have watched for this series.</small></div>
+  <div class="field" id="watchedEpisodeMinutesField" hidden><label>Average Episode Length (Minutes)</label><input id="formEpisodeMinutes" type="number" min="1" max="600" step="0.01" placeholder="e.g. 45"><small>Watch time = episodes watched × average episode length ÷ 60.</small></div>
+  <div class="field"><label>Position (Optional)</label><input id="formPosition" type="number" min="1" step="1" placeholder="Leave empty to add at the end"><small>Enter a position number to insert the item at that place.</small></div>
+  <div class="modal-actions"><button class="btn" id="cancelModal">Cancel</button><button class="btn primary" id="saveItem">Save</button></div>
+ </div>
+</div>
+
+<!-- Bulk Add Modal -->
+<div class="modal-wrap" id="bulkWrap">
+ <div class="modal">
+  <h2 id="bulkTitle">Bulk Add Series</h2>
+  <div class="field">
+    <label>Series Names</label>
+    <textarea id="bulkNames" placeholder="Breaking Bad&#10;Dark&#10;The Wire&#10;Lost"></textarea>
+    <small>Enter one series name per line. Duplicate names are skipped.</small>
+  </div>
+  <div class="field"><label>Default Release Year (Optional)</label><input id="bulkYear" type="number" min="1900" max="2100" placeholder="e.g. 2020"></div>
+  <div class="field" id="bulkStatusField"><label>Default Watch Status</label><select id="bulkStatus"><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select></div>
+
+  <div class="field"><label>Default Rating (Optional)</label><input id="bulkRating" type="number" min="0" max="10" step="0.01" placeholder="Leave empty"></div>
+  <div class="field" id="bulkEpisodesField" hidden><label>Episodes Watched (Optional)</label><input id="bulkEpisodesWatched" type="number" min="0" step="1" placeholder="Leave empty"></div>
+  <div class="field" id="bulkEpisodeMinutesField" hidden><label>Average Episode Length (Minutes)</label><input id="bulkEpisodeMinutes" type="number" min="1" max="600" step="0.01" placeholder="e.g. 45"></div>
+  <div class="modal-actions"><button class="btn" id="cancelBulk">Cancel</button><button class="btn primary" id="bulkSave">Add All</button></div>
+ </div>
+</div>
+<!-- Watchlist single-add modal: OMDb search and selection; bulk add stays unchanged. -->
+<div class="modal-wrap" id="watchAddModal">
+ <div class="modal">
+  <h2>Add to Watchlist</h2>
+  <div class="field">
+   <label for="watchTitleSearch">Search movie or series in OMDb</label>
+   <input id="watchTitleSearch" type="search" autocomplete="off" placeholder="Start typing a movie or series title...">
+   <small>Choose a result below. The title, poster and release year will be loaded automatically.</small>
+   <div id="watchOmdbResults" class="watch-omdb-results"></div>
+  </div>
+  <div class="field" id="watchManualFields" hidden>
+   <label for="watchManualName">Title</label><input id="watchManualName" type="text" placeholder="Enter movie or series name">
+   <label for="watchManualYear" style="margin-top:10px">Release Year (Optional)</label><input id="watchManualYear" type="number" min="1888" max="2100" placeholder="e.g. 2024">
+  </div>
+  <div class="watch-omdb-preview" id="watchSelectedPreview" hidden>
+   <img id="watchSelectedPoster" alt="Selected title poster">
+   <div><strong id="watchSelectedName"></strong><small id="watchSelectedYear"></small><small>Selected from OMDb</small></div>
+  </div>
+  <p class="muted" style="font-size:12px">New Watchlist items are automatically marked as Planned.</p>
+  <div class="field"><label>Rating (0–10)</label><input id="watchAddRating" type="number" min="0" max="10" step="0.01" placeholder="Optional"></div>
+  <div class="field"><label>Position (Optional)</label><input id="watchAddPosition" type="number" min="1" step="1" placeholder="Leave empty to add at the end"><small>Choose where the title should appear in your Watchlist.</small></div>
+  <div class="modal-actions"><button class="btn" id="cancelWatchAdd">Cancel</button><button class="btn primary" id="saveWatchAdd">Add to Watchlist</button></div>
+ </div>
+</div>
+<div class="modal-wrap" id="customItemModal">
+ <div class="modal">
+  <h2 id="customItemModalTitle">Add Item</h2>
+  <div class="field" id="customSearchField"><label>Search title</label><input id="customTitleSearch" type="search" name="silver-custom-title-search" autocomplete="off" placeholder="Start typing a movie or series name..."><small>Choose the exact result from OMDb. The release year will be filled automatically.</small><div id="omdbSearchResults" class="omdb-results"></div></div>
+  <div class="field"><label>Selected title</label><input id="customSelectedTitle" placeholder="Enter title manually"></div>
+  <div class="field"><label>Release Year</label><input id="customSelectedYear" type="text" inputmode="numeric" placeholder="Enter release year"></div>
+  <div class="field"><label>Watch Status</label><select id="customSelectedStatus"><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select></div>
+  <div class="field"><label>Rating (0–10)</label><input id="customSelectedRating" type="number" min="0" max="10" step="0.01" placeholder="Optional"></div>
+  <div class="field"><label>Position in List (Optional)</label><input id="customSelectedPosition" type="number" min="1" step="1" placeholder="Leave empty to add at the end"><small>Choose where this item should appear. For editing, enter its new position.</small></div>
+  <div class="modal-actions"><button class="btn" id="cancelCustomItem">Cancel</button><button class="btn primary" id="saveCustomItem">Add to List</button></div>
+ </div>
+</div>
+<div class="modal-wrap" id="customBulkModal"><div class="modal"><h2>Add Multiple Titles</h2><div class="field"><label>One title per line</label><textarea id="customBulkNames" placeholder="Breaking Bad&#10;Dark&#10;The Wire"></textarea><small>Duplicate names are skipped. Values below are applied to every new title.</small></div><div class="field"><label>Default Release Year (Optional)</label><input id="customBulkDefaultYear" type="number" min="1900" max="2100" placeholder="e.g. 2020"></div><div class="field"><label>Default Watch Status</label><select id="customBulkAddStatus"><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select></div><div class="field"><label>Default Rating (Optional)</label><input id="customBulkAddRating" type="number" min="0" max="10" step="0.01" placeholder="Leave empty"></div><div class="modal-actions"><button class="btn" id="cancelCustomBulk">Cancel</button><button class="btn primary" id="saveCustomBulk">Add All</button></div></div></div>
+<div class="modal-wrap" id="favoriteItemModal">
+ <div class="modal">
+  <h2 id="favoriteItemModalTitle">Add Favorite</h2>
+  <div class="field" id="favoriteSearchField"><label for="favoriteItemSearch">Search in Overview</label><input id="favoriteItemSearch" type="search" autocomplete="off" placeholder="Search a title..."><div id="favoriteItemResults" class="omdb-results" style="max-height:240px;overflow:auto"></div></div>
+  <div class="field"><label>Selected title</label><input id="favoriteSelectedName" readonly placeholder="Choose a title from the search results"></div>
+  <div class="field"><label>Position in Favorites</label><input id="favoriteItemPosition" type="number" min="1" step="1" placeholder="Leave empty to add at the end"><small>Enter the position where this favorite should appear.</small></div>
+  <div class="modal-actions"><button class="btn" id="favoriteItemCancel">Cancel</button><button class="btn primary" id="favoriteItemSave">Add to Favorites</button></div>
+ </div>
+</div>
+<div class="modal-wrap" id="overviewAddModal">
+ <div class="modal">
+  <h2 id="overviewModalTitle">Add to Overview</h2>
+  <div class="field"><label for="overviewTitleSearch">Search movie or series in OMDb</label><input id="overviewTitleSearch" type="search" autocomplete="off" placeholder="Start typing a title..."><small>Choose a result. Title, release year, content type and poster are imported from OMDb.</small><div id="overviewOmdbResults" class="watch-omdb-results"></div></div>
+  <div class="watch-omdb-preview" id="overviewSelectedPreview" hidden><img id="overviewSelectedPoster" alt="Selected poster"><div><strong id="overviewSelectedName"></strong><small id="overviewSelectedYear"></small><small id="overviewSelectedType"></small></div></div>
+  <div class="field"><label for="overviewSelectedStatus">Watch Status</label><select id="overviewSelectedStatus"><option>Planned</option><option>Watching</option><option>Watched</option><option>Stop Watching</option></select></div>
+  <div class="field"><label for="overviewSelectedRating">Rating (0–10)</label><input id="overviewSelectedRating" type="number" min="0" max="10" step="0.01" placeholder="Optional"></div>
+  <div class="field"><label for="overviewPosition">Position in Overview</label><input id="overviewPosition" type="number" min="1" step="1" placeholder="Leave empty to add at the end"></div>
+  <div class="modal-actions"><button class="btn" id="overviewCancel">Cancel</button><button class="btn primary" id="overviewSave">Add to Overview</button></div>
+ </div>
+</div>
+<div class="modal-wrap" id="overviewDetailModal">
+ <div class="modal overview-detail-modal">
+  <h2 id="overviewDetailTitle">Title details</h2>
+  <div id="overviewDetailLoading">Loading details from OMDb…</div>
+  <div class="overview-detail-layout" id="overviewDetailContent" hidden>
+   <img id="overviewDetailPoster" alt="Title poster" hidden>
+   <div class="overview-detail-copy">
+    <p id="overviewDetailYear"></p><p id="overviewDetailType"></p><p id="overviewDetailRating"></p>
+    <p id="overviewDetailPlot"></p><p id="overviewDetailActors"></p><p id="overviewDetailDirector"></p>
+    <p id="overviewDetailGenre"></p><p id="overviewDetailRuntime"></p>
+   </div>
+  </div>
+  <div class="modal-actions"><button class="btn" id="overviewDetailClose">Close</button></div>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
+
